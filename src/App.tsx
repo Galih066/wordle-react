@@ -6,7 +6,8 @@ import InputBox from './components/InputBox';
 import './App.css'
 
 function App() {
-	const [resultData, setResultData] = useState<string>(() => '');
+	const [resultData, setResultData] = useState<string[]>(() => []);
+	const [letter, setLetter] = useState<string[]>(() => []);
 
 	useEffect(() => {
 		const data = findRandomResult(result);
@@ -17,7 +18,14 @@ function App() {
 		<div className='outer-container'>
 			{
 				new Array(maxTry).fill(0).map((item, index) => {
-					return <InputBox key={index} />
+					return (
+						<InputBox
+							key={index}
+							setLetter={setLetter}
+							letter={letter}
+							result={resultData}
+						/>
+					)
 				})
 			}
 		</div>
