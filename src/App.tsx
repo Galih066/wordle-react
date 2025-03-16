@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { result } from './data/main-data';
+import { maxTry } from './data/constant';
 import { findRandomResult } from './helpers/random-helper';
+import InputBox from './components/InputBox';
 import './App.css'
 
 function App() {
@@ -8,12 +10,16 @@ function App() {
 
 	useEffect(() => {
 		const data = findRandomResult(result);
-		setResultData(data)
+		setResultData(data);
 	}, []);
 
 	return (
 		<div className='outer-container'>
-			<h1>{resultData}</h1>
+			{
+				new Array(maxTry).fill(0).map((item, index) => {
+					return <InputBox key={index} />
+				})
+			}
 		</div>
 	)
 }
